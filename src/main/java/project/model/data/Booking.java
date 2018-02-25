@@ -20,11 +20,11 @@ public class Booking {
     @Column(name = "id_user", nullable = false)
     private long idUser;
 
-    @Column(nullable = false)
+    @Column(name = "time_from", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date from;
 
-    @Column(nullable = false)
+    @Column(name = "time_to", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date to;
 
