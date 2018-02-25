@@ -54,6 +54,11 @@
       <artifactId>spring-boot-starter-security</artifactId>
       <version>1.5.10.RELEASE</version>
     </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <scope>runtime</scope>
+    </dependency>
   </dependencies>
 
 

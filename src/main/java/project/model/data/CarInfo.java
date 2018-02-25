@@ -2,12 +2,14 @@ package project.model.data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "car_info")
 public class CarInfo {
 
+    @Id
     @Column(name = "id_car", nullable = false)
     private Long id;
 
