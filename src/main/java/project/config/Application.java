@@ -11,7 +11,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import javax.activation.DataSource;
 
 @SpringBootApplication(scanBasePackages = {"project"})
 @EnableJpaRepositories("project.model.repositories")
