@@ -1,6 +1,6 @@
 package project.model.data;
 
-public class RegisterForm {
+public class UserRegisterForm {
 
     private String login;
     private CharSequence password;
@@ -12,10 +12,10 @@ public class RegisterForm {
     private String drivingLicense;
     private String role;
 
-    public RegisterForm(){}
+    public UserRegisterForm(){}
 
 
-    public RegisterForm(String login, CharSequence password, String name, String surname, String email, String sex, String pesel, String drivingLicense, String role) {
+    public UserRegisterForm(String login, CharSequence password, String name, String surname, String email, String sex, String pesel, String drivingLicense, String role) {
         this.login = login;
         this.password = password;
         this.name = name;

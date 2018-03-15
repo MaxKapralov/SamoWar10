@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import project.model.data.RegisterForm;
+import project.model.data.UserRegisterForm;
 import project.model.data.User;
 import project.model.data.UserInfo;
 import project.model.repositories.UserInfoRepository;
@@ -14,12 +14,21 @@ import project.model.repositories.UserRepository;
 @RestController
 public class UserRestController {
 
-    @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+    private UserInfoRepository userInfoRepository;
+
 
     @Autowired
-    UserInfoRepository userInfoRepository;
+    public void setUserRepository(UserRepository repository)
+    {
+        this.userRepository = repository;
+    }
 
+    @Autowired
+    public void setUserInfoRepository(UserInfoRepository repository)
+    {
+        this.userInfoRepository = repository;
+    }
 
     @GetMapping(path = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
     public UserInfo getUserWithId(@RequestParam("id") Long id)
@@ -28,7 +37,7 @@ public class UserRestController {
     }
 
     @PostMapping(path = "/user", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> save(@RequestBody RegisterForm form)
+    public ResponseEntity<Void> save(@RequestBody UserRegisterForm form)
     {
         Long id = saveUser(form);
         saveUserInfo(form, id);
@@ -51,14 +60,14 @@ public class UserRestController {
     }
 
 
-    private Long saveUser(RegisterForm form)
+    private Long saveUser(UserRegisterForm form)
     {
         User user = new User(form.getLogin(), form.getPassword());
         return userRepository.save(user).getId();
 
     }
 
-    private void saveUserInfo(RegisterForm form, Long id)
+    private void saveUserInfo(UserRegisterForm form, Long id)
     {
         UserInfo user = new UserInfo(id, form.getName(), form.getSurname(), form.getEmail(), form.getSex(), form.getPesel(), form.getDrivingLicense(), form.getRole());
         userInfoRepository.save(user);
