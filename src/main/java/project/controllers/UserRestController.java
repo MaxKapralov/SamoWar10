@@ -35,6 +35,22 @@ public class UserRestController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @DeleteMapping(path = "user")
+    public ResponseEntity<Void>deleteUser(@RequestParam("id") Long id)
+    {
+        userRepository.delete(id);
+        userInfoRepository.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/user")
+    public ResponseEntity<Void> editUser(@RequestParam("id") Long id, @RequestBody UserInfo user)
+    {
+        userInfoRepository.edit(user.getName(), user.getSurname(), user.getEmail(), user.getSex(), user.getPesel(), user.getDrivingLicense(), user.getRole(), id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
     private Long saveUser(RegisterForm form)
     {
         User user = new User(form.getLogin(), form.getPassword());
