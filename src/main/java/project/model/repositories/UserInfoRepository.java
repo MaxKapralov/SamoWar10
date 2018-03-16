@@ -13,4 +13,12 @@ public interface UserInfoRepository extends CrudRepository<UserInfo, Long>{
     UserInfo edit(@Param("name")String name,@Param("surname") String surname, @Param("email") String email, @Param("sex") String sex,
                   @Param("pesel") String pesel, @Param("drivingLicense") String drivingLicense, @Param("role") String role, @Param("id") Long id);
 
+
+    UserInfo findByEmail(@Param("email") String email);
+
+
+    UserInfo findByPesel(@Param("pesel") String pesel);
+
+
+    UserInfo findByDrivingLicense(@Param("drivingLicense") String drivingLicense);
 }

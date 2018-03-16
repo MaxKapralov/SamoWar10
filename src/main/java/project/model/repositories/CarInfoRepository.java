@@ -11,4 +11,5 @@ public interface CarInfoRepository extends CrudRepository<CarInfo, Long>{
 
     List<CarInfo> findAll();
 
+    CarInfo findByNumber(String number);
 }

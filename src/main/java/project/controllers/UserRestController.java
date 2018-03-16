@@ -60,6 +60,46 @@ public class UserRestController {
     }
 
 
+    @GetMapping(path = "/checkLogin")
+    public ResponseEntity<Void> checkLogin(@RequestParam("login") String login)
+    {
+        User user = userRepository.findByLogin(login);
+        if(user == null)
+            return new ResponseEntity<>(HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @GetMapping(path = "/checkEmail")
+    public ResponseEntity<Void> checkEmail(@RequestParam("email") String email)
+    {
+        UserInfo user = userInfoRepository.findByEmail(email);
+        if(user == null)
+            return new ResponseEntity<>(HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @GetMapping(path = "/checkPesel")
+    public ResponseEntity<Void> checkPesel(@RequestParam("pesel") String pesel)
+    {
+        UserInfo user = userInfoRepository.findByPesel(pesel);
+        if(user == null)
+            return new ResponseEntity<>(HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @GetMapping(path = "/checkDrivingLicense")
+    public ResponseEntity<Void> checkDrivingLicense(String drivingLicense)
+    {
+        UserInfo user = userInfoRepository.findByDrivingLicense(drivingLicense);
+        if(user == null)
+            return new ResponseEntity<>(HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+
     private Long saveUser(UserRegisterForm form)
     {
         User user = new User(form.getLogin(), form.getPassword());
