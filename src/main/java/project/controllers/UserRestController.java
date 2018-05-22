@@ -31,9 +31,9 @@ public class UserRestController {
     }
 
     @GetMapping(path = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserInfo getUserWithId(@RequestParam("id") Long id)
+    public ResponseEntity<UserInfo> getUserWithId(@RequestParam("id") Long id)
     {
-         return userInfoRepository.findOne(id);
+        return ResponseEntity.status(HttpStatus.OK).body(userInfoRepository.findOne(id));
     }
 
     @PostMapping(path = "/user", consumes = MediaType.APPLICATION_JSON_VALUE)

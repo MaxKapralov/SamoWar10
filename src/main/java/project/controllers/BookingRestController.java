@@ -29,16 +29,16 @@ public class BookingRestController {
     }
 
     @GetMapping(path = "/booking")
-    public List<Booking> getUsersBooking(@RequestParam(value = "idUser", required = false) Long idUser, @RequestParam(value = "idCar", required = false) Long idCar)
+    public ResponseEntity<List<Booking>> getUsersBooking(@RequestParam(value = "idUser", required = false) Long idUser, @RequestParam(value = "idCar", required = false) Long idCar)
     {
         //add booking with date
         if(idUser != null && idCar != null)
-            return bookingRepository.findWithIdCarAndIdUser(idCar, idUser);
+            return ResponseEntity.status(HttpStatus.OK).body(bookingRepository.findWithIdCarAndIdUser(idCar, idUser));
         else if(idUser != null)
-            return bookingRepository.findWithIdUser(idUser);
+            return ResponseEntity.status(HttpStatus.OK).body(bookingRepository.findWithIdUser(idUser));
         else if(idCar != null)
-            return bookingRepository.findWithIdCar(idCar);
-        return null;
+            return ResponseEntity.status(HttpStatus.OK).body(bookingRepository.findWithIdCar(idCar));
+        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);
     }
 
 

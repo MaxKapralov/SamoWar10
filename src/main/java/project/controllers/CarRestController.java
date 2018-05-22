@@ -33,15 +33,15 @@ public class CarRestController {
     }
 
     @GetMapping(path = "/cars")
-    public List<Car> getListOfCars()
+    public ResponseEntity<List<Car>> getListOfCars()
     {
-        return carRepository.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body(carRepository.findAll());
     }
 
     @GetMapping(path = "/carsInfo")
-    public List<CarInfo> getListOfCarsInfo()
+    public ResponseEntity<List<CarInfo>> getListOfCarsInfo()
     {
-        return carInfoRepository.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body(carInfoRepository.findAll());
     }
 
     @GetMapping(path = "checkNumber")
