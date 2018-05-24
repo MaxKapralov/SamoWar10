@@ -3,11 +3,11 @@ package project.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import project.model.data.AddNewCarForm;
 import project.model.data.Car;
 import project.model.data.CarInfo;
+import project.model.data.CarServices;
 import project.model.repositories.CarInfoRepository;
 import project.model.repositories.CarRepository;
 
@@ -19,6 +19,7 @@ public class CarRestController {
 
     private CarRepository carRepository;
     private CarInfoRepository carInfoRepository;
+    private CarServices carServices;
 
     @Autowired
     public void setCarRepository(CarRepository repository)
@@ -32,10 +33,38 @@ public class CarRestController {
         this.carInfoRepository = repository;
     }
 
+    @Autowired
+    public void setCarServices(CarServices carServices){this.carServices = carServices;}
+
     @GetMapping(path = "/cars")
     public ResponseEntity<List<Car>> getListOfCars()
     {
         return ResponseEntity.status(HttpStatus.OK).body(carRepository.findAll());
+    }
+    @GetMapping(path = "/car")
+    public ResponseEntity<Car> getCarWithId(@RequestParam("id") Long id)
+    {
+        Car car = carRepository.findOne(id);
+        if(car != null)
+            return ResponseEntity.status(HttpStatus.OK).body(car);
+        else
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+    }
+
+    @GetMapping(path = "/carInfo")
+    public ResponseEntity<CarInfo> getCarInfoWithId(@RequestParam("id") Long id)
+    {
+        CarInfo car = carInfoRepository.findOne(id);
+        if(car != null)
+            return ResponseEntity.status(HttpStatus.OK).body(car);
+        else
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+    }
+
+    @PostMapping(path = "/car")
+    public ResponseEntity<Void> addNewCar(@RequestBody AddNewCarForm newCarForm)
+    {
+        return carServices.createNewCar(newCarForm);
     }
 
     @GetMapping(path = "/carsInfo")

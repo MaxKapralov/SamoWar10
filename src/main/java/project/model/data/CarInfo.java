@@ -92,7 +92,7 @@ public class CarInfo {
         this.engineVol = engineVol;
     }
 
-    public boolean isConditioner() {
+    public boolean hasConditioner() {
         return conditioner;
     }
 

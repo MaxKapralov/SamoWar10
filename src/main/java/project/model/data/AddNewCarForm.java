@@ -76,7 +76,7 @@ public class AddNewCarForm {
         this.engineVol = egineVol;
     }
 
-    public boolean isConditioner() {
+    public boolean hasConditioner() {
         return conditioner;
     }
 

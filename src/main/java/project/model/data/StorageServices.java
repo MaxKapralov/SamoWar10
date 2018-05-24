@@ -34,7 +34,7 @@ public class StorageServices
         try
         {
             Files.copy(file.getInputStream(), this.rootDirectory.resolve(file.getOriginalFilename()));
-            imageRepository.save(new Image(idCar, file.getOriginalFilename()));
+            imageRepository.save(new Image(idCar, file.getOriginalFilename() + idCar));
         }catch(IOException e)
         {
             System.out.println(e.getMessage());
